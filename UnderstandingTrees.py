@@ -53,3 +53,31 @@ def remove(root, val):
             root.val = minNode.val
             root.right = remove(root.right, minNode.val)
     return root
+
+#Depth First Search
+
+#Inorder Traversal
+#Prints nodes in sorted order if it's a binary tree
+def inOrder(root):
+    if not root:
+        return None
+    inOrder(root.left)
+    print(root.val)
+    inOrder(root.right)
+
+#Preorder Traversal
+def preorder(root):
+    if not root:
+        return None
+    print(root.val)
+    preorder(root.left)
+    preorder(root.right)
+
+#Postorder Traversal
+
+def postorder(root):
+    if not root:
+        return None
+    postorder(root.left)
+    postorder(root.right)
+    print(root.val)
