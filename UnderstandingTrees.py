@@ -95,11 +95,10 @@ def bfs(root):
     while len(queue) > 0:
         print("level", level)
         for i in range(len(queue)):
-            curr = queue.popleft
+            curr = queue.popleft()
             print(curr.val)
             if curr.left:
                 queue.append(curr.left)
             if curr.right:
                 queue.append(curr.right)
         level += 1
-        
