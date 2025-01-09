@@ -16,3 +16,6 @@ def canSeePersonCount(heights):
 
 height = [10, 6, 8, 5, 11, 9]
 print(canSeePersonCount(height)==[3, 1, 2, 1, 1, 0])
+#Time complexity O(n)
+#Space Complexity O(n)
+#Similar problem --> daily temperature
