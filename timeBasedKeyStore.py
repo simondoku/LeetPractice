@@ -27,25 +27,13 @@ class TimeMap:
 Time Complexity:
 
 set: 
-𝑂
-(
-1
-)
+𝑂(1)
 O(1) — appending to a list.
 get: 
-𝑂
-(
-log
-⁡
-𝑛
-)
+𝑂(log𝑛)
 O(logn) — binary search over timestamps.
 Space Complexity:
 
-𝑂
-(
-𝑁
-)
-O(N) — where 
-𝑁
-N is the total number of set operations'''
+𝑂(𝑁)
+O(N) — where N is the total number of set operations
+'''
