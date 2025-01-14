@@ -30,3 +30,8 @@ class TestProductSubarray(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+'''
+Time complexity: O(n)
+Space Complexity: O(1)
+'''
