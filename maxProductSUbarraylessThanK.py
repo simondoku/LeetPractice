@@ -1,5 +1,22 @@
 import unittest
 def productSubarray(nums, k):
+    '''
+    Initialize Pointers and Variables:
+        left = 0: Start of the sliding window.
+        product = 1: Keeps track of the product of elements in the current window.
+        count = 0: Counts the number of valid subarrays.
+
+    Expand the Window (Right Pointer):
+        Iterate through the array with a right pointer.
+        Multiply product by nums[right].
+
+    Shrink the Window if Product ≥ k:
+        If product becomes greater than or equal to k, 
+        shrink the window by moving left to the right and dividing product by nums[left].
+    
+    Count Subarrays:
+        For every valid window, the number of valid subarrays ending at right is (right - left + 1).
+    '''
     if k <= 1:
         return 0
     left = 0
