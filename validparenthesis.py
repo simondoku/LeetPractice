@@ -1,4 +1,5 @@
-def isValid(s):
+import unittest
+def isValid(s: str) -> bool:
     '''
     -if brac not in dict, put it in the stack
     -if in dict(meaning its a closing brac), check if the top of the stack is the
@@ -25,3 +26,22 @@ def isValid(s):
                 return False
     return len(stack) == 0
         
+    
+
+class TestingValidParenthesis(unittest.TestCase):
+    def edgecases(self):
+        self.assertEqual(isValid(" "), False)
+        self.assertEqual(isValid("a"), False)
+    def testCases(self):
+        self.assertEqual(isValid("(()"), False)
+        self.assertEqual(isValid("((()))"), True)
+        self.assertEqual(isValid("(("), False)
+        self.assertEqual(isValid("))))"), False)
+
+if __name__ == '__main__':
+    unittest.main()
+
+'''
+Time Complexity: O(n)
+Space Complexity: O(1)
+'''

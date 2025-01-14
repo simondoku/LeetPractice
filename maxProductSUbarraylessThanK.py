@@ -1,5 +1,5 @@
 import unittest
-def productSubarray(nums, k):
+def productSubarray(nums: list[int], k: int):
     '''
     Initialize Pointers and Variables:
         left = 0: Start of the sliding window.
