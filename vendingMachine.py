@@ -1,6 +1,28 @@
 import unittest
 
 class VendingMachine:
+    """
+    A class to represent a vending machine.
+    Attributes
+    ----------
+    items : dict
+        A dictionary to store items and their details in the format {item_name: (price, quantity)}
+    balance : int
+        Tracks the money added to the machine
+    Methods
+    -------
+    add_item(item_name, price, quantity):
+        Adds or restocks an item in the vending machine.
+    display_items():
+        Displays the available items in the vending machine.
+    add_money(amount):
+        Adds money to the vending machine balance.
+    buy_item(item_name):
+        Allows a user to buy an item from the vending machine if sufficient balance is available.
+    return_change():
+        Returns the remaining balance as change to the user.
+    """
+
     def __init__(self):
         self.items = {}  # Dictionary to store items and their details {item_name: (price, quantity)}
         self.balance = 0  # Tracks the money added to the machine
