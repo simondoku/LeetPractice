@@ -34,9 +34,5 @@ class ListNode:
         while second:
             temp1, temp2 = first.next, second.next
             first.next = second
-            second.next = first
+            second.next = temp1
             first, second = temp1, temp2
-
-        
-
-        
