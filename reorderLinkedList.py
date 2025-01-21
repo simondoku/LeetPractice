@@ -38,8 +38,5 @@ class ListNode:
             first, second = temp1, temp2
 
         
-        
-
-        
 
         
