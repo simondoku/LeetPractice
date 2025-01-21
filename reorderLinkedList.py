@@ -19,5 +19,16 @@ class ListNode:
         while fast and fast.next:
             slow = slow.next 
             fast = fast.next.next
+        
+        #Reverse the second half of the linkedlist
+        prev, curr = None, slow.next
+        slow.next = None
+        while curr:
+            next_temp = curr.next
+            curr.next = prev
+            prev = curr
+            curr = next_temp
+
+        
 
         
