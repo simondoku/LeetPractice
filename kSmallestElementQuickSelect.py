@@ -20,6 +20,23 @@ def quickselect(arr, k):
         arr[right], arr[store_index] = arr[store_index], arr[right]
         return store_index
     
+    left, right = 0, len(arr) - 1
+    while True:
+        if left == right:
+            return arr[left]
+        pivot_index = random.randint(left, right)
+
+        pivot_index = partition(left, right, pivot_index)
+
+        if pivot_index == k:
+            return arr[pivot_index]
+        elif pivot_index < k:
+            left = pivot_index + 1
+
+        else:
+            right = pivot_index - 1
+
+
 
     
     
