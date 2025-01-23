@@ -1,115 +1,79 @@
-import unittest
-
 class VendingMachine:
-    """
-    A class to represent a vending machine.
-    Attributes
-    ----------
-    items : dict
-        A dictionary to store items and their details in the format {item_name: (price, quantity)}
-    balance : int
-        Tracks the money added to the machine
-    Methods
-    -------
-    add_item(item_name, price, quantity):
-        Adds or restocks an item in the vending machine.
-    display_items():
-        Displays the available items in the vending machine.
-    add_money(amount):
-        Adds money to the vending machine balance.
-    buy_item(item_name):
-        Allows a user to buy an item from the vending machine if sufficient balance is available.
-    return_change():
-        Returns the remaining balance as change to the user.
-    """
-
     def __init__(self):
-        self.items = {}  # Dictionary to store items and their details {item_name: (price, quantity)}
-        self.balance = 0  # Tracks the money added to the machine
-
-    def add_item(self, item_name, price, quantity):
-        if item_name in self.items:
-            current_price, current_quantity = self.items[item_name]
-            self.items[item_name] = (price, current_quantity + quantity)
-        else:
-            self.items[item_name] = (price, quantity)
-        print(f"{item_name} restocked. New quantity: {self.items[item_name][1]}")
-
-    def display_items(self):
-        print("Available items:")
-        for item_name, (price, quantity) in self.items.items():
-            if quantity > 0:
-                print(f"- {item_name}: ${price} (Quantity: {quantity})")
-            else:
-                print(f"- {item_name}: Out of stock")
+        # Initialize inventory and balance
+        self.inventory = {
+            "A1": {"item": "Coke", "price": 1.25, "quantity": 10},
+            "A2": {"item": "Pepsi", "price": 1.50, "quantity": 10},
+            "B1": {"item": "Chips", "price": 1.00, "quantity": 10},
+            "C1": {"item": "Candy", "price": 0.75, "quantity": 10},
+            # Add other slots as necessary
+        }
+        self.balance = 0.0
 
     def add_money(self, amount):
-        if amount > 0:
-            self.balance += amount
-            print(f"${amount} added. Current balance: ${self.balance}")
-        else:
-            print("Invalid amount. Please add a positive value.")
+        """Add money to the vending machine."""
+        if amount <= 0:
+            return "Invalid amount. Please insert a positive value."
+        self.balance += amount
+        return f"Current balance: ${self.balance:.2f}"
 
-    def buy_item(self, item_name):
-        if item_name not in self.items:
-            print(f"{item_name} is not available in the vending machine.")
-            return
+    def select_item(self, slot_code):
+        """Select an item based on the slot code."""
+        if slot_code not in self.inventory:
+            return "Invalid slot code. Please try again."
 
-        price, quantity = self.items[item_name]
+        item = self.inventory[slot_code]
+        if item["quantity"] == 0:
+            return f"{item['item']} is out of stock."
 
+        if self.balance < item["price"]:
+            return f"Insufficient balance. {item['item']} costs ${item['price']:.2f}."
+
+        # Deduct the price and dispense the item
+        self.balance -= item["price"]
+        item["quantity"] -= 1
+        change = self.balance
+        self.balance = 0  # Reset balance after purchase
+        return f"Vending {item['item']}. Change: ${change:.2f}"
+
+    def check_inventory(self):
+        """Return the current inventory status."""
+        inventory_status = {}
+        for slot, details in self.inventory.items():
+            inventory_status[slot] = f"{details['item']}: {details['quantity']} left"
+        return inventory_status
+
+    def restock(self, slot_code, quantity):
+        """Restock a specific slot with additional items."""
+        if slot_code not in self.inventory:
+            return "Invalid slot code. Cannot restock."
         if quantity <= 0:
-            print(f"{item_name} is out of stock.")
-        elif self.balance < price:
-            print(f"Insufficient balance. {item_name} costs ${price}, but your balance is ${self.balance}.")
-        else:
-            self.balance -= price
-            self.items[item_name] = (price, quantity - 1)
-            print(f"You bought {item_name} for ${price}. Remaining balance: ${self.balance}")
+            return "Invalid quantity. Please provide a positive value."
 
-    def return_change(self):
-        print(f"Returning ${self.balance} in change.")
+        self.inventory[slot_code]["quantity"] += quantity
+        return f"Restocked {self.inventory[slot_code]['item']} to {self.inventory[slot_code]['quantity']} units."
+
+    def return_balance(self):
+        """Return the remaining balance."""
+        change = self.balance
         self.balance = 0
+        return f"Returning ${change:.2f}."
 
-class TestVendingMachine(unittest.TestCase):
-    def setUp(self):
-        self.vm = VendingMachine()
+# Example usage
+if __name__ == "__main__":
+    vm = VendingMachine()
 
-    def test_add_item(self):
-        self.vm.add_item("Soda", 1.50, 10)
-        self.assertIn("Soda", self.vm.items)
-        self.assertEqual(self.vm.items["Soda"], (1.50, 10))
+    # Add money
+    print(vm.add_money(2.00))
 
-    def test_add_money(self):
-        self.vm.add_money(5)
-        self.assertEqual(self.vm.balance, 5)
-        self.vm.add_money(-1)
-        self.assertEqual(self.vm.balance, 5)  # Balance should not change with invalid amount
+    # Select item
+    print(vm.select_item("A1"))
 
-    def test_buy_item(self):
-        self.vm.add_item("Soda", 1.50, 10)
-        self.vm.add_money(5)
-        self.vm.buy_item("Soda")
-        self.assertEqual(self.vm.balance, 3.50)
-        self.assertEqual(self.vm.items["Soda"], (1.50, 9))
+    # Check inventory
+    print(vm.check_inventory())
 
-    def test_buy_item_insufficient_balance(self):
-        self.vm.add_item("Soda", 1.50, 10)
-        self.vm.add_money(1)
-        self.vm.buy_item("Soda")
-        self.assertEqual(self.vm.balance, 1)
-        self.assertEqual(self.vm.items["Soda"], (1.50, 10))
+    # Restock
+    print(vm.restock("A1", 5))
 
-    def test_buy_item_out_of_stock(self):
-        self.vm.add_item("Soda", 1.50, 0)
-        self.vm.add_money(5)
-        self.vm.buy_item("Soda")
-        self.assertEqual(self.vm.balance, 5)
-        self.assertEqual(self.vm.items["Soda"], (1.50, 0))
-
-    def test_return_change(self):
-        self.vm.add_money(5)
-        self.vm.return_change()
-        self.assertEqual(self.vm.balance, 0)
-
-if __name__ == '__main__':
-    unittest.main()
+    # Return balance
+    print(vm.return_balance())
