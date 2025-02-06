@@ -11,7 +11,7 @@ class Solution:
     def __init__(self):
         self.map = {}
 
-    def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
+    def copyRandomList(self, head):
         if head is None:
             return None
         if head in self.map:
