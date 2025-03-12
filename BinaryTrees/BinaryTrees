@@ -1,0 +1,24 @@
+Consists of Nodes like a doubly linkedlist
+But Pointers point down(left and right pointers)
+Successive Nodes are know as child nodes of their successors
+Leaf Nodes are Nodes that do not have any children
+TopMost Nodes are known as root nodes
+Cycles are not allowed in Binary Trees
+Nodes that share the same parent are known as sibling nodes
+Every node has to be connected to each other
+The height of a single node is one
+For a Node with the children, the height starts with that node till its lowest descendents
+
+the height by the number of edges is n-1 where n is the number of nodes in the path from the root to the lowest leaf
+the Depth is measure bottom up of the current node all the way up to the root node.
+
+
+
+###########################
+
+Binary Search Trees
+This is like a binary tree but sorted
+every single node on the left subtree must be less that every single node on the right subtree
+There are no duplicates
+
+Sorting allows for log(n) time which is more efficient that O(n)
