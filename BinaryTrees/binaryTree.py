@@ -3,7 +3,7 @@ class TreeNode:
         self.val = val
         self.left = None
         self.right = None
-
+    #This is a binary tree that is sorted. The left < curr < right
     def binarySearchTree(self, root, target):
         if not root:
             return False
