@@ -12,8 +12,6 @@ For a Node with the children, the height starts with that node till its lowest d
 the height by the number of edges is n-1 where n is the number of nodes in the path from the root to the lowest leaf
 the Depth is measure bottom up of the current node all the way up to the root node.
 
-
-
 ###########################
 
 Binary Search Trees
@@ -22,3 +20,16 @@ every single node on the left subtree must be less that every single node on the
 There are no duplicates
 
 Sorting allows for log(n) time which is more efficient that O(n)
+
+What does it mean when we say a tree is balanced? When the absolute difference between the height of its left and righ subtree is at most 1 for every node.
+
+############################
+
+Insertion From a Binary Search Tree
+
+Time Complexity of Insertion is O(logn) if the tree is balanced. This is because we will continue until we reach a leaf node which makes the number of nodes proportional to the height of the tree
+
+Removal From a Binary Search Tree
+Deleting a Node with one or no children: - If the node has no children, the node before the target node points to null, effectively deleting it - if the node has one child, the node before the target node points to the child of the target node, the target node and effectively removing it
+
+Deleting a Node with Two children: - we replace the node with its in-order successor, i.e the smallest node among all the nodes greater than the target node. - This is formally defined as the leftmost node in the right subtree of the target node
