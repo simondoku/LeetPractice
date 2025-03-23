@@ -33,3 +33,9 @@ Removal From a Binary Search Tree
 Deleting a Node with one or no children: - If the node has no children, the node before the target node points to null, effectively deleting it - if the node has one child, the node before the target node points to the child of the target node, the target node and effectively removing it
 
 Deleting a Node with Two children: - we replace the node with its in-order successor, i.e the smallest node among all the nodes greater than the target node. - This is formally defined as the leftmost node in the right subtree of the target node
+
+Time Complexity:
+O(logn) if tree is balanced, O(n) worst case
+
+Space Complexity:
+O(logn) best case, O(n) worst case --> this is due to recursion used to traverse the tree
