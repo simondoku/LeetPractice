@@ -39,3 +39,9 @@ O(logn) if tree is balanced, O(n) worst case
 
 Space Complexity:
 O(logn) best case, O(n) worst case --> this is due to recursion used to traverse the tree
+
+
+###############################################################
+
+Depth first search
+
