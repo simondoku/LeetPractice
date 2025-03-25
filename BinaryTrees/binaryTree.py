@@ -1,3 +1,6 @@
+from collections import deque
+
+
 class TreeNode:
     def __init__(self, val: int):
         self.val = val
@@ -63,4 +66,49 @@ class TreeNode:
                 #after we copy the successors value, we have to remove the original node to avoid duplication
                 root.right = self.remove(root.right,minNode.val )
         return root
+
+    #Depth First Search
+    def inorder(self, root):
+        if not root:
+            return 
+        self.inorder(root.left)
+        print(root.val) #alway print the root.val
+        self.inorder(root.right)
+    
+    def preorder(self, root):
+        if not root:
+            return
+        print(root.val)
+        self.preorder(root.left)
+        self.preorder(root.right)
+
+
+    def postorder(self, root):
+        if not root:
+            return
+        self.postorder(root.left)
+        self.postorder(root.right)
+        print(root.val)
+
+    #Breadth First Search
+
+    def bfs(root):
+        queue = deque()
+
+        if root:
+            queue.append(root)
+
+        level = 0
+        while len(queue) > 0:
+            print("level: ", level)
+            for i in range(len(queue)):
+                curr = queue.popleft()
+                print(curr.val)
+                if curr.left:
+                    queue.append(curr.left)
+                if curr.right:
+                    queue.append(curr.right)
+            level += 1
+        
+
 
