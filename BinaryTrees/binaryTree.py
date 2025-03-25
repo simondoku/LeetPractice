@@ -109,6 +109,37 @@ class TreeNode:
                 if curr.right:
                     queue.append(curr.right)
             level += 1
-        
 
+    #Valid Path
+    #Return True if there is a valid path from the root to the leaf  node
+
+    def validPath(self,root):
+        if not root or root.val == 0:
+            return False
+        
+        if not root.left and not root.right:
+            return True
+        if self.validPath(root.left):
+            return True
+        if self.validPath(root.right):
+            return True
+        return False
+
+    #Constructing the path while we go
+
+    def createValidPath(self, root, path):
+        if not root or root.val == 0:
+            return False
+        path.append(root.val)
+
+        if not root.left and not root.right:
+            return True
+        if self.createValidPath(root.left, path):
+            return True
+        if self.createValidPath(root.right, path):
+            return True
+        path.pop()
+        return False
+    
+    #Time and Space complexity: O(n)
 
